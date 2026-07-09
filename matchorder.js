@@ -60,3 +60,9 @@ function pricesCross(incoming, resting){
   else return incoming.price <= resting.price;
 }
 }
+
+
+
+
+//export
+module.exports = {matchOrder};
