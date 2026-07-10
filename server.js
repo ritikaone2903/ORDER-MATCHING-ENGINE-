@@ -1,6 +1,9 @@
 const express = require('express');//imported express in same name variable
 const app = express();
 
+const orderRouter = require('./routes/routes');
+app.use('/orders',orderRouter);
+
 app.use(express.json()); //to be able to parse the json req bodies 
 
 
@@ -22,3 +25,6 @@ app.post('./orders', (req,res) => {
 
 
 app.listen(3000, () => console.log('server running on port 3000'));
+
+
+
