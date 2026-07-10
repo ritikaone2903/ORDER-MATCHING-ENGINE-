@@ -27,4 +27,15 @@ app.post('./orders', (req,res) => {
 app.listen(3000, () => console.log('server running on port 3000'));
 
 
+const io = require('socket.io')(server);
+
+io.on('connection', (socket) => {
+    console.log('client connected :', socket.id);
+
+    socket.on('disconnected', () => console.log('client left'));
+});
+
+function onTradeMatched(trade){
+    io.emit('trade',trade); 
+}
 

@@ -2,6 +2,28 @@ function matchOrder(incomingOrder , orderBook){
     const trades = [];
     const oppositeHeap = incomingOrder.side === 'buy' ? orderBook.sellHeap : orderBook.buyHeap ;
 
+    const orderQueue = [] ;
+    let processing = false ;
+
+    function submitOrder(incomingOrder){
+        orderQueue.push(order);
+        processQueue();
+    }
+
+    async function processQueue() {
+        if(processing) return ;
+        processing = true;
+        while(orderQueue.length>0){
+            const order = orderQueue.shift();
+            await matchOrder(order);
+        }
+        processing = false;
+    }
+
+
+
+
+
 
     while(incomingOrder.quantity > 0){
         const bestResting = orderBook.popLiveOrder(oppositeHeap);//this will give the best possible live orer from the orderbook

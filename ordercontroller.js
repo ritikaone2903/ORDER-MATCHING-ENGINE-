@@ -23,3 +23,8 @@ app.get('./orders',authenticate, (req,res) =>{//this will only run if authentica
 
 
 
+//error handler 
+app.use((err,req,res,next) => {
+    console.error(err.stack);
+    res.status(err.statuscode || 500).json({ error: err.message || 'internal server error'});
+});
